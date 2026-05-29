@@ -1,5 +1,5 @@
 # Ex06 BMI Calculator
-## Date: 
+## Date: 29.05.
 
 ## AIM
 To develop a responsive and interactive Body Mass Index (BMI) Calculator using React that allows users to input their height and weight, and calculates their BMI to categorize their health status (e.g., Underweight, Normal, Overweight, Obese).
@@ -65,11 +65,149 @@ Create routing structure with react-router-dom:
 
 ## PROGRAM
 
+APP.JSX
+```
+import { useState } from "react";
+import "./App.css";
 
+function App() {
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
+  const [bmi, setBmi] = useState("");
+  const [status, setStatus] = useState("");
+
+  const calculateBMI = () => {
+    const h = height / 100;
+    const result = (weight / (h * h)).toFixed(2);
+
+    setBmi(result);
+
+    if (result < 18.5) {
+      setStatus("Underweight");
+    } else if (result >= 18.5 && result < 25) {
+      setStatus("Normal Weight");
+    } else if (result >= 25 && result < 30) {
+      setStatus("Overweight");
+    } else {
+      setStatus("Obese");
+    }
+  };
+
+  return (
+    <div className="container">
+      <div className="box">
+        <h1>BMI Calculator</h1>
+
+        <input
+          type="number"
+          placeholder="Enter Weight (kg)"
+          value={weight}
+          onChange={(e) => setWeight(e.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Enter Height (cm)"
+          value={height}
+          onChange={(e) => setHeight(e.target.value)}
+        />
+
+        <button onClick={calculateBMI}>Calculate</button>
+
+        {bmi && (
+          <div className="result">
+            <h2>Your BMI: {bmi}</h2>
+            <h3>{status}</h3>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+APP.CSS
+```
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f4ff;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 20px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(180, 160, 255, 0.3);
+  border: 2px solid #e6dcff;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #7b5cff;
+}
+
+input {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #d6c7ff;
+  outline: none;
+  background-color: #faf8ff;
+}
+
+input:focus {
+  border: 2px solid #a78bfa;
+}
+
+button {
+  padding: 12px 25px;
+  background-color: #a78bfa;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #8b6df5;
+}
+
+.result {
+  margin-top: 20px;
+  background-color: #f3efff;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.result h2 {
+  color: #6d4cff;
+}
+
+.result h3 {
+  color: #444;
+}
+```
 
 ## OUTPUT
 
-
+<img width="1292" height="779" alt="Screenshot 2026-05-29 103208" src="https://github.com/user-attachments/assets/43cc204d-2c3b-4630-b2e0-516467df81e6" />
 
 
 ## RESULT
